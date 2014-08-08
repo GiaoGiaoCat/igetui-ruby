@@ -1,6 +1,6 @@
 # Igetui::Ruby
 
-TODO: Write a gem description
+(个推)[http://www.igetui.com/]服务端 ruby-sdk
 
 ## Installation
 
