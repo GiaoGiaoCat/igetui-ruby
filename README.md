@@ -18,7 +18,7 @@ Or install it yourself as:
 
 ## Usage
 
-** Push Message To Single **
+### Push Message To Single
 
     pusher = IGeTui.pusher(your_app_id, your_app_key, your_master_secret)
 
@@ -40,7 +40,7 @@ Or install it yourself as:
     ret = pusher.push_message_to_single(single_message, client)
     p ret
 
-** Push Message To List **
+### Push Message To List
 
     pusher = IGeTui.pusher(your_app_id, your_app_key, your_master_secret)
 
@@ -69,7 +69,7 @@ Or install it yourself as:
     content_id = pusher.get_content_id(list_message)
     ret = pusher.push_message_to_list(content_id, client_list)
 
-** Push Message To App **
+### Push Message To App
 
     pusher = IGeTui.pusher(your_app_id, your_app_key, your_master_secret)
 
@@ -88,6 +88,20 @@ Or install it yourself as:
     # 发送一条通知到程序
     ret = pusher.push_message_to_app(app_message)
     p ret
+
+### Custom Test
+
+    require 'rubygems'
+    require 'IGeTui'
+
+    @pusher = IGeTui.pusher(your_app_id, your_app_key, your_master_secret)
+    ret = @pusher.get_client_id_status(@cid_1)
+    p ret
+
+### Run Test
+
+    # 运行测试之前，请先修改 test/pusher_test.rb 中的相关配置
+    rake test
 
 ## Contributing
 
