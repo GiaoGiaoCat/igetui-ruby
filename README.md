@@ -1,6 +1,6 @@
 # Igetui::Ruby
 
-(个推)[http://www.igetui.com/]服务端 ruby-sdk
+[个推](http://www.igetui.com/)服务端 ruby-sdk
 
 ## Installation
 
@@ -98,7 +98,7 @@ Or install it yourself as:
     ret = @pusher.get_client_id_status(@cid_1)
     p ret
 
-### Run Test
+### Auto Test
 
     # 运行测试之前，请先修改 test/pusher_test.rb 中的相关配置
     rake test
