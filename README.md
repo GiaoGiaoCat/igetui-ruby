@@ -12,13 +12,13 @@ gem 'igetui-ruby', require: 'IGeTui'
 
 And then execute:
 
-```ruby
+```bash
 $ bundle
 ```
 
 Or install it yourself as:
 
-```ruby
+```bash
 $ gem install igetui-ruby
 ```
 
