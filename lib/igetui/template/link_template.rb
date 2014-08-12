@@ -12,7 +12,7 @@ module IGeTui
       @transmission_content = ''
       @is_ring = true
       @is_vibrate = true
-      @is_clearable = false
+      @is_clearable = true
       super
     end
 
