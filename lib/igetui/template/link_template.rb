@@ -1,6 +1,6 @@
 module IGeTui
-  class NotificationTemplate < BaseTemplate
-    attr_accessor :title, :text, :logo, :logo_url
+  class LinkTemplate < BaseTemplate
+    attr_accessor :title, :text, :logo, :logo_url, :url
     attr_accessor :is_ring, :is_vibrate, :is_clearable
 
     def initialize
@@ -42,17 +42,11 @@ module IGeTui
       action_chain_3.type = GtReq::ActionChain::Type::Goto
       action_chain_3.next = 10030
 
-      # appStartUp
-      app_start_up = GtReq::AppStartUp.new(android: '', symbia: '', ios: '')
-
       # start web
       action_chain_4 = GtReq::ActionChain.new
       action_chain_4.actionId = 10030
-      action_chain_4.type = GtReq::ActionChain::Type::Startapp
-      action_chain_4.appid = ''
-      action_chain_4.autostart = @transmission_type == 1
-      action_chain_4.appstartupid = app_start_up
-      action_chain_4.failedAction = 100
+      action_chain_4.type = GtReq::ActionChain::Type::Startweb
+      action_chain_4.url = url
       action_chain_4.next = 100
 
       # end
