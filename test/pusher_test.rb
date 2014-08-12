@@ -28,6 +28,13 @@ class PusherTest < MiniTest::Unit::TestCase
     assert_equal ret["result"], "ok"
   end
 
+  def test_to_single_link_notification
+    single_message = IGeTui::SingleMessage.new
+    single_message.data = link_template
+    ret = @pusher.push_message_to_single(single_message, @client_1)
+    assert_equal ret["result"], "ok"
+  end
+
   def test_to_single_transmission
     single_message = IGeTui::SingleMessage.new
     single_message.data = transmission_template
@@ -56,12 +63,23 @@ class PusherTest < MiniTest::Unit::TestCase
 
   private
 
-  def notification_template
-    template = IGeTui::NotificationTemplate.new
+  def set_template_base_info(template)
     template.logo = 'push.png'
     template.logo_url = 'http://www.igetui.com/wp-content/uploads/2013/08/logo_getui1.png'
     template.title = '测试标题'
     template.text = '测试文本'
+  end
+
+  def link_template
+    template = IGeTui::LinkTemplate.new
+    set_template_base_info(template)
+    template.url = "http://www.baidu.com"
+    template
+  end
+
+  def notification_template
+    template = IGeTui::NotificationTemplate.new
+    set_template_base_info(template)
     template
   end
 
