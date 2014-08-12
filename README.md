@@ -120,6 +120,11 @@ p ret
 rake test
 ```
 
+## Documents
+
+* [参数说明](https://github.com/wjp2013/igetui-ruby/wiki/%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E)
+* [模板类型说明](https://github.com/wjp2013/igetui-ruby/wiki/%E6%A8%A1%E6%9D%BF%E7%B1%BB%E5%9E%8B%E8%AF%B4%E6%98%8E)
+
 ## Contributing
 
 1. Fork it ( http://github.com/<my-github-username>/igetui-ruby/fork )
