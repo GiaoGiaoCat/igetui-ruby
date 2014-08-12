@@ -21,6 +21,13 @@ class PusherTest < MiniTest::Unit::TestCase
     assert_equal ret["result"], "Online"
   end
 
+  def test_to_single_noty_pop_load
+    single_message = IGeTui::SingleMessage.new
+    single_message.data = noty_pop_load_template
+    ret = @pusher.push_message_to_single(single_message, @client_1)
+    assert_equal ret["result"], "ok"
+  end
+
   def test_to_single_notification
     single_message = IGeTui::SingleMessage.new
     single_message.data = notification_template
@@ -95,6 +102,21 @@ class PusherTest < MiniTest::Unit::TestCase
               }
     content = content.to_s.gsub(":", "").gsub("=>", ":")
     template.transmission_content = content
+    template
+  end
+
+  # attr_accessor :load_icon, :load_title, :load_url
+  def noty_pop_load_template
+    template = IGeTui::NotyPopLoadTemplate.new
+    set_template_base_info(template)
+    template.pop_title = "弹框标题"
+    template.pop_text = "弹框内容"
+    template.pop_image = ""
+    template.pop_button_1 = "下载"
+    template.pop_button_2 = "取消"
+    template.load_icon = "file://icon.png"
+    template.load_title = "下载内容"
+    template.load_url = "http://gdown.baidu.com/data/wisegame/c95836e06c224f51/weixinxinqing_5.apk"
     template
   end
 
