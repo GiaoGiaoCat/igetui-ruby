@@ -7,7 +7,7 @@
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'igetui-ruby', require: 'IGeTui'
+gem 'igetui-ruby', require: 'igetui'
 ```
 
 And then execute:
