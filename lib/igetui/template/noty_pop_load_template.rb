@@ -5,6 +5,7 @@ module IGeTui
     attr_accessor :pop_title, :pop_text, :pop_image
     attr_accessor :pop_button_1, :pop_button_2
     attr_accessor :load_icon, :load_title, :load_url
+    attr_accessor :android_mask, :symbia_mask, :ios_mask
     attr_accessor :is_auto_install, :is_active
 
     def initialize
@@ -25,6 +26,9 @@ module IGeTui
       @is_ring = true
       @is_vibrate = true
       @is_clearable = true
+      @android_mask = ''
+      @symbia_mask = ''
+      @ios_mask = ''
       @is_auto_install = false
       @is_active = false
       super
