@@ -3,6 +3,8 @@ module IGeTui
     attr_accessor :transmission_type, :transmission_content
 
     def initialize
+      @transmission_type = 0
+      @transmission_content = ''
       @push_info = nil
     end
 

@@ -1,19 +1,15 @@
 module IGeTui
   class LinkTemplate < BaseTemplate
-    attr_accessor :title, :text, :logo, :logo_url, :url
-    attr_accessor :is_ring, :is_vibrate, :is_clearable
+    STRING_ATTRIBUTES = %i(title text logo logo_url url).freeze
+    BOOLEAN_ATTRIBUTES = %i(is_ring is_vibrate is_clearable).freeze
+
+    attr_accessor *STRING_ATTRIBUTES, *BOOLEAN_ATTRIBUTES
 
     def initialize
-      @title = ''
-      @text = ''
-      @logo = ''
-      @logo_url = ''
-      @transmission_type = 0
-      @transmission_content = ''
-      @is_ring = true
-      @is_vibrate = true
-      @is_clearable = true
       super
+
+      STRING_ATTRIBUTES.each { |attr| instance_variable_set("@#{attr}", '') }
+      BOOLEAN_ATTRIBUTES.each { |attr| instance_variable_set("@#{attr}", true) }
     end
 
     def get_action_chain

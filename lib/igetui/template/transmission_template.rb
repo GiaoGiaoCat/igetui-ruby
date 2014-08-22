@@ -1,8 +1,6 @@
 module IGeTui
   class TransmissionTemplate < BaseTemplate
     def initialize
-      @transmission_type = 0
-      @transmission_content = ''
       super
     end
 
