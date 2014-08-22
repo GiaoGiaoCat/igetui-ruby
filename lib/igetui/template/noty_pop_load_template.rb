@@ -1,37 +1,23 @@
 module IGeTui
   class NotyPopLoadTemplate < BaseTemplate
-    attr_accessor :title, :text, :logo, :logo_url
-    attr_accessor :is_ring, :is_vibrate, :is_clearable
-    attr_accessor :pop_title, :pop_text, :pop_image
-    attr_accessor :pop_button_1, :pop_button_2
-    attr_accessor :load_icon, :load_title, :load_url
-    attr_accessor :android_mask, :symbia_mask, :ios_mask
-    attr_accessor :is_auto_install, :is_active
+    STRING_ATTRIBUTES = %i(
+      title text logo logo_url
+      pop_title pop_text pop_image
+      pop_button_1 pop_button_2
+      load_icon load_title load_url
+      android_mask symbia_mask ios_mask
+    ).freeze
+    BOOLEAN_ATTRIBUTES_OF_TRUE = %i(is_ring is_vibrate is_clearable).freeze
+    BOOLEAN_ATTRIBUTES_OF_FALSE = %i(is_auto_install is_active).freeze
+
+    attr_accessor *STRING_ATTRIBUTES, *BOOLEAN_ATTRIBUTES_OF_TRUE, *BOOLEAN_ATTRIBUTES_OF_FALSE
 
     def initialize
-      @title = ''
-      @text = ''
-      @logo = ''
-      @logo_url = ''
-      @pop_title = ''
-      @pop_text = ''
-      @pop_image = ''
-      @pop_button_1 = ''
-      @pop_button_2 = ''
-      @load_icon = ''
-      @load_title = ''
-      @load_url = ''
-      @transmission_type = 0
-      @transmission_content = ''
-      @is_ring = true
-      @is_vibrate = true
-      @is_clearable = true
-      @android_mask = ''
-      @symbia_mask = ''
-      @ios_mask = ''
-      @is_auto_install = false
-      @is_active = false
       super
+
+      STRING_ATTRIBUTES.each { |attr| instance_variable_set("@#{attr}", '') }
+      BOOLEAN_ATTRIBUTES_OF_TRUE.each { |attr| instance_variable_set("@#{attr}", true) }
+      BOOLEAN_ATTRIBUTES_OF_FALSE.each { |attr| instance_variable_set("@#{attr}", false) }
     end
 
     def get_action_chain
