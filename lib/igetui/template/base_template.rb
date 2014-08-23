@@ -5,7 +5,7 @@ module IGeTui
     def initialize
       @transmission_type = 0
       @transmission_content = ''
-      @push_info = nil
+      @push_info = GtReq::PushInfo.new
     end
 
     def get_transparent(pusher)
@@ -25,13 +25,10 @@ module IGeTui
     def get_push_type; end
 
     def get_push_info
-      unless @push_info
-        @push_info = GtReq::PushInfo.new
-        @push_info.actionKey = ''
-        @push_info.badge = ''
-        @push_info.message = ''
-        @push_info.sound = ''
-      end
+      @push_info.actionKey = ''
+      @push_info.badge = ''
+      @push_info.message = ''
+      @push_info.sound = ''
       @push_info
     end
 
@@ -39,8 +36,6 @@ module IGeTui
     #   iOS Pusher need the top three fields of 'push_info' are required.
     #   the others can be blank string.
     def set_push_info(action_loc_key, badge, message, sound, payload, loc_key, loc_args, launch_image)
-
-      @push_info = GtReq::PushInfo.new
       @push_info.actionLocKey = action_loc_key
       @push_info.badge = badge
       @push_info.message = message
