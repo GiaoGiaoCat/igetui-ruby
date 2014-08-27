@@ -16,11 +16,11 @@ module IGeTui
     attr_accessor :app_id_list, :phone_type_list, :province_list, :tag_list
 
     def initialize
+      super
       @app_id_list = []
       @phone_type_list = []
       @province_list = []
       @tag_list = []
-      super
     end
   end
 end
