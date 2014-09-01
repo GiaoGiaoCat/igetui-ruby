@@ -108,7 +108,7 @@ require 'rubygems'
 require 'igetui'
 
 @pusher = IGeTui.pusher(your_app_id, your_app_key, your_master_secret)
-ret = @pusher.get_client_id_status(@cid_1)
+ret = @pusher.get_client_id_status(your_client_id)
 p ret
 ```
 
