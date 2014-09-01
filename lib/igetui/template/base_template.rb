@@ -21,8 +21,13 @@ module IGeTui
       transparent
     end
 
-    def get_action_chain; end
-    def get_push_type; end
+    def get_action_chain
+      raise NotImplementedError, 'Must be implemented by subtypes.'
+    end
+
+    def get_push_type
+      raise NotImplementedError, 'Must be implemented by subtypes.'
+    end
 
     def get_push_info
       @push_info.actionKey = ''
