@@ -26,8 +26,8 @@ module IGeTui
         if validate_length(args, :loc_args)
           alertMap["loc-args"] = args[:loc_args].split(", ")
         end
-      elsif validate_length(nil, message)
-        alertMap["body"] = message
+      elsif validate_length(nil, args[:message])
+        alertMap["body"] = args[:message]
       end
 
       apnsMap["alert"] = alertMap
@@ -35,11 +35,11 @@ module IGeTui
         apnsMap["action-loc-key"] = args[:action_loc_key]
       end
 
-      apnsMap["badge"] = badge
+      apnsMap["badge"] = args[:badge]
 
       h = Hash.new
       h["aps"] = apnsMap
-      h["payload"] = payload if validate_length(nil, payload)
+      h["payload"] = args[:payload] if validate_length(nil, args[:payload])
 
       return h
     end

@@ -81,12 +81,14 @@ class PusherTest < MiniTest::Unit::TestCase
     template = IGeTui::LinkTemplate.new
     set_template_base_info(template)
     template.url = "http://www.baidu.com"
+    template.set_push_info("open", 4, "message", "")
     template
   end
 
   def notification_template
     template = IGeTui::NotificationTemplate.new
     set_template_base_info(template)
+    template.set_push_info("open", 4, "message", "")
     template
   end
 
@@ -94,14 +96,17 @@ class PusherTest < MiniTest::Unit::TestCase
     template = IGeTui::TransmissionTemplate.new
     # Notice: content should be string.
     content = {
-                action: "notification",
-                title: "标题aaa",
-                content: "内容",
-                type: "article",
-                id: "4274"
+                "action" => "notification",
+                "title" => "标题aaa",
+                "content" => "内容",
+                "type" => "Article",
+                "id" => "1234"
               }
+
     content = content.to_s.gsub(":", "").gsub("=>", ":")
     template.transmission_content = content
+    puts template.transmission_content
+    template.set_push_info("test", 1, "test1", "")
     template
   end
 

@@ -29,7 +29,9 @@ end
 
 require "igetui/version"
 require 'protobuf/GtReq.pb'
+require "igetui/push_info"
 require "igetui/template"
+require "igetui/validate"
 require "igetui/message"
 require "igetui/pusher"
 require "igetui/client"
