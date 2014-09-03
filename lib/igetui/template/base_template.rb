@@ -1,11 +1,10 @@
 module IGeTui
   class BaseTemplate
-    attr_accessor :transmission_type, :transmission_content
+    attr_accessor :transmission_type, :transmission_content, :push_info
 
     def initialize
       @transmission_type = 0
       @transmission_content = ''
-      @push_info = GtReq::PushInfo.new
     end
 
     def get_transparent(pusher)
@@ -29,39 +28,41 @@ module IGeTui
       raise NotImplementedError, 'Must be implemented by subtypes.'
     end
 
-    def get_push_info
-      @push_info.actionKey = ''
-      @push_info.badge = ''
-      @push_info.message = ''
-      @push_info.sound = ''
-      @push_info
+    def get_client_data(pusher)
+      string = self.get_transparent(pusher).serialize_to_string
+      Base64.strict_encode64 string
     end
 
-    # Need TEST:
-    #   iOS Pusher need the top three fields of 'push_info' are required.
-    #   the others can be blank string.
-    def set_push_info(action_loc_key, badge, message, sound, payload, loc_key, loc_args, launch_image)
+    def get_push_info
+      @push_info || init_push_info
+    end
+
+    # NOTE:
+    # iOS Pusher need the top four fields of 'push_info' are required.
+    # options can be includes [:payload, :loc_key, :loc_args, :launch_image]
+    # http://docs.igetui.com/pages/viewpage.action?pageId=590588
+    def set_push_info(action_loc_key, badge, message, sound, options = {})
+      init_push_info
       @push_info.actionLocKey = action_loc_key
-      @push_info.badge = badge
+      @push_info.badge = badge.to_s
       @push_info.message = message
-      @push_info.sound = sound if sound
-      @push_info.payload = payload if payload
-      @push_info.locKey = loc_key if loc_key
-      @push_info.locArgs = loc_args if loc_args
-      @push_info.launchImage = launch_image if launch_image
+      @push_info.sound = sound
+      @push_info.payload = options[:payload]
+      @push_info.locKey = options[:loc_key]
+      @push_info.locArgs = options[:loc_args]
+      @push_info.launchImage = options[:launch_image]
+      # validate method need refactoring.
+      # Validate.new.validate(args)
+    end
 
-      args = {
-        loc_key: loc_key,
-        loc_args: locArgs,
-        message: message,
-        action_loc_key: action_loc_key,
-        launch_image: launch_image,
-        badge: badge,
-        sound: sound,
-        payload: payload
-      }
+    private
 
-      Validate.new.validate(args)
+    def init_push_info
+      @push_info = GtReq::PushInfo.new
+      @push_info.message = ''
+      @push_info.actionKey = ''
+      @push_info.sound = ''
+      @push_info.badge = ''
       @push_info
     end
 
