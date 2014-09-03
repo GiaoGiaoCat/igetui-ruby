@@ -65,6 +65,8 @@ content = {
           }
 content = content.to_s.gsub(":", "").gsub("=>", ":")
 template.transmission_content = content
+# 设置iOS的推送参数，如果只有安卓 App，可以忽略下面一行
+# template.set_push_info("", 1, "这里是iOS推送的显示信息", "")
 
 # 创建群发消息
 list_message = IGeTui::ListMessage.new
