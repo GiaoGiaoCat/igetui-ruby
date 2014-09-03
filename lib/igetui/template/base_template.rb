@@ -5,7 +5,6 @@ module IGeTui
     def initialize
       @transmission_type = 0
       @transmission_content = ''
-      @push_info = PushInfo.new
     end
 
     def get_transparent(pusher)
@@ -15,7 +14,7 @@ module IGeTui
       transparent.taskId = ''
       transparent.action = 'pushmessage'
       transparent.actionChain = get_action_chain
-      transparent.pushInfo = push_info
+      transparent.pushInfo = get_push_info
       transparent.appId = pusher.app_id
       transparent.appKey = pusher.app_key
       transparent
@@ -29,20 +28,41 @@ module IGeTui
       raise NotImplementedError, 'Must be implemented by subtypes.'
     end
 
+    def get_client_data(pusher)
+      string = self.get_transparent(pusher).serialize_to_string
+      Base64.strict_encode64 string
+    end
+
+    def get_push_info
+      @push_info || init_push_info
+    end
+
     # NOTE:
     # iOS Pusher need the top four fields of 'push_info' are required.
     # options can be includes [:payload, :loc_key, :loc_args, :launch_image]
     # http://docs.igetui.com/pages/viewpage.action?pageId=590588
     def set_push_info(action_loc_key, badge, message, sound, options = {})
-      args = options.merge({
-        action_loc_key: action_loc_key,
-        badge: badge,
-        message: message,
-        sound: sound
-      })
-      @push_info.update_properties(args)
+      init_push_info
+      @push_info.actionLocKey = action_loc_key
+      @push_info.badge = badge.to_s
+      @push_info.message = message
+      @push_info.sound = sound
+      @push_info.payload = options[:payload]
+      @push_info.locKey = options[:loc_key]
+      @push_info.locArgs = options[:loc_args]
+      @push_info.launchImage = options[:launch_image]
       # validate method need refactoring.
-      Validate.new.validate(args)
+      # Validate.new.validate(args)
+    end
+
+    private
+
+    def init_push_info
+      @push_info = GtReq::PushInfo.new
+      @push_info.message = ''
+      @push_info.actionKey = ''
+      @push_info.sound = ''
+      @push_info.badge = ''
       @push_info
     end
 

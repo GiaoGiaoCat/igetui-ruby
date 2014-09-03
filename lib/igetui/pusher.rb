@@ -14,7 +14,7 @@ module IGeTui
       data = {
         'action' => 'pushMessageToSingleAction',
         'appkey' => app_key,
-        'clientData' => base64Str(template),
+        'clientData' => template.get_client_data(self),
         'transmissionContent' => template.transmission_content,
         'isOffline' => message.is_offline,
         'offlineExpireTime' => message.offline_expire_time,
@@ -50,7 +50,7 @@ module IGeTui
       data = {
         'action' => 'pushMessageToAppAction',
         'appkey' => app_key,
-        'clientData' => base64Str(template),
+        'clientData' => template.get_client_data(self),
         'transmissionContent' => template.transmission_content,
         'isOffline' => message.is_offline,
         'offlineExpireTime' => message.offline_expire_time,
@@ -91,7 +91,7 @@ module IGeTui
       data = {
         'action' => 'getContentIdAction',
         'appkey' => app_key,
-        'clientData' => base64Str(template),
+        'clientData' => template.get_client_data(self),
         'transmissionContent' => template.transmission_content,
         'isOffline' => message.is_offline,
         'offlineExpireTime' => message.offline_expire_time,
@@ -112,11 +112,6 @@ module IGeTui
 
 
     private
-
-    def base64Str(template)
-      string = template.get_transparent(self).serialize_to_string
-      Base64.strict_encode64 string
-    end
 
     def connect
       time_stamp = Time.now.to_i
