@@ -21,7 +21,7 @@ module IGeTui
     def_delegators :pusher, :get_content_id, :cancel_content_id
 
     def pusher(app_id, api_key, master_secret)
-      @pusher ||= IGeTui::Pusher.new(API_URL, app_id, api_key, master_secret)
+      IGeTui::Pusher.new(API_URL, app_id, api_key, master_secret)
     end
 
   end
