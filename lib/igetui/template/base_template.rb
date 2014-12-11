@@ -62,7 +62,7 @@ module IGeTui
       @push_info.message = ''
       @push_info.actionKey = ''
       @push_info.sound = ''
-      @push_info.badge = ''
+      @push_info.badge = '-1'
       @push_info
     end
 
