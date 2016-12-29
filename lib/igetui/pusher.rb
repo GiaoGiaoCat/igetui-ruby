@@ -145,23 +145,19 @@ module IGeTui
       req = Net::HTTP::Post.new(url.path, initheader = { 'Content-Type' => 'application/json' })
       req.body = data
 
-      is_fail = true
-      retry_time_limit = 3
       try_time = 0
-
-      while is_fail && try_time < retry_time_limit
-        begin
-          res = Net::HTTP.new(url.host, url.port).start { |http| http.request(req) }
-          is_fail = false
-        rescue
-          is_fail = true
-          try_time += 1
-          puts ('try ' + try_time.to_s + ' time failed, time out.')
+      begin
+        res = Net::HTTP.new(url.host, url.port).start { |http| http.request(req) }
+      rescue => e
+        try_time += 1
+        if try_time >= 3 
+          raise e
+        else
+          retry
         end
       end
 
       JSON.parse res.body
     end
-
   end
 end
